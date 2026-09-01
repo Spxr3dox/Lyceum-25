@@ -1,0 +1,16 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# Редактори
+.vscode/
+.idea/
+*.swp
+
+# Тимчасові файли Word (лишаються, якщо документ відкритий)
+~$*
