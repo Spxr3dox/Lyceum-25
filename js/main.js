@@ -22,6 +22,10 @@
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  // Блоки з .reveal сховані лише тоді, коли JS справді працює:
+  // якщо скрипт упаде, сторінка лишиться читабельною, а не порожньою.
+  document.documentElement.classList.add('js');
+
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var isReduced = function () { return reduced.matches; };
 
@@ -105,7 +109,7 @@
         $$('[data-count]', e.target).forEach(countUp);
         revObs.unobserve(e.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
     revealables.forEach(function (el) { revObs.observe(el); });
   }
 

@@ -1014,6 +1014,8 @@ button { border: 0; background: none; cursor: pointer; -webkit-tap-highlight-col
   transition: transform var(--t-mid) var(--ease-ios), box-shadow var(--t-mid) var(--ease-ios);
 }
 .glist__row:hover { transform: translateY(-2px); box-shadow: var(--sh-2); }
+/* Без min-width:0 flex-елемент не стискається і довгі ПІБ ламають картку. */
+.glist__row > span:last-child { min-width: 0; overflow-wrap: break-word; }
 .glist__name { display: block; font-size: 16px; font-weight: 600; letter-spacing: -.015em; }
 .glist__role { display: block; font-size: 14px; line-height: 1.4; color: var(--ink-muted); margin-top: 2px; }
 .glist__group[hidden], .glist__row[hidden] { display: none; }
@@ -1418,12 +1420,13 @@ select.field__i {
    Поява при скролі
    ============================================================ */
 
-.reveal {
+/* Ховаємо тільки якщо JS живий — інакше блок лишиться назавжди невидимим. */
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity var(--t-slow) var(--ease-ios), transform var(--t-slow) var(--ease-ios);
 }
-.reveal.is-in { opacity: 1; transform: none; }
+.js .reveal.is-in { opacity: 1; transform: none; }
 
 /* ============================================================
    Адаптив
@@ -1483,7 +1486,7 @@ select.field__i {
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .js .reveal { opacity: 1; transform: none; }
   .hero__layer { transform: none !important; }
   .hero__layer--back { transform: scale(1.1) !important; }
   body.sheet-open .page-shell { transform: none; filter: brightness(.72); }
